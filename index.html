@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>6º A/B — Mitos e Verdades: Derretimento das Geleiras</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --bg: #f5f8fb;
+      --card: #ffffff;
+      --accent: #125cdb;
+      --accent-light: #06b6d4;
+      --muted: #6b7280;
+      --glass: rgba(255, 255, 255, 0.6);
+      --shadow-light: rgba(2, 6, 23, 0.08);
+      --shadow-dark: rgba(15, 23, 42, 0.06);
+      --text-primary: #0f172a;
+      --text-secondary: #444;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-primary);
+      background: linear-gradient(180deg, #eef5ff 0%, var(--bg) 100%);
+      margin: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      --transition: 0.3s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --accent: #3b82f6;
+        --accent-light: #60a5fa;
+        --muted: #94a3b8;
+        --glass: rgba(30, 41, 59, 0.6);
+        --shadow-light: rgba(255, 255, 255, 0.05);
+        --shadow-dark: rgba(255, 255, 255, 0.12);
+        --text-primary: #e0e7ff;
+        --text-secondary: #cbd5e1;
+        background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      }
+    }
+
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding-top: 72px; /* espaço para navbar fixa */
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      transition: background-color var(--transition), color var(--transition);
+    }
+
+    /* Navbar fixa */
+    nav.navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      box-shadow: 0 2px 10px var(--shadow-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 28px;
+      z-index: 1000;
+      transition: background-color var(--transition), box-shadow var(--transition);
+    }
+    nav.navbar .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    nav.navbar .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff;
+      font-weight: 700;
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      box-shadow: 0 6px 20px var(--shadow-light);
+      transition: background var(--transition);
+    }
+    nav.navbar .title {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--accent);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    /* Botão modo escuro */
+    #darkModeToggle {
+      background: transparent;
+      border: 2px solid var(--accent);
+      border-radius: 24px;
+      color: var(--accent);
+      font-weight: 600;
+      padding: 6px 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+    }
+    #darkModeToggle:hover,
+    #darkModeToggle:focus {
+      background-color: var(--accent);
+      color: #fff;
+      outline: none;
+    }
+
+    /* Container principal */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 28px 28px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 28px;
+      min-height: calc(100vh - 72px);
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 0 16px 16px;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 10px 30px var(--shadow-dark);
+      border: 1px solid rgba(15, 23, 42, 0.05);
+      transition: box-shadow var(--transition), background-color var(--transition);
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeInUp 0.5s forwards;
+    }
+    main .card:nth-child(1) { animation-delay: 0.1s; }
+    main .card:nth-child(2) { animation-delay: 0.25s; }
+    main .card:nth-child(3) { animation-delay: 0.4s; }
+    main .card:nth-child(4) { animation-delay: 0.55s; }
+
+    .card:hover {
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.2);
+    }
+
+    /* Section titles */
+    .section-title {
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: var(--accent);
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 6px;
+      user-select: none;
+      display: inline-block;
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    /* Lead text */
+    p.lead {
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--muted);
+      margin: 6px 0 0 0;
+      line-height: 1.4;
+    }
+
+    /* Lists */
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .team-list .pill {
+      background: #e6f0ff;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      padding: 8px 16px;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 9999px;
+      box-shadow: none;
+      user-select: none;
+      transition: background-color var(--transition), border-color var(--transition);
+      cursor: default;
+    }
+    @media (prefers-color-scheme: dark) {
+      .team-list .pill {
+        background: #2a3a67;
+        border-color: #3b82f6;
+        color: #3b82f6;
+      }
+    }
+
+    .sector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .result-item {
+      background: #f9fbff;
+      border-radius: 12px;
+      padding: 14px 20px;
+      border: 1.5px solid rgba(18, 92, 219, 0.3);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      flex: 1 1 200px;
+      user-select: none;
+      box-shadow: 0 6px 16px rgba(18, 92, 219, 0.15);
+      transition: background-color var(--transition), border-color var(--transition);
+    }
+    @media (prefers-color-scheme: dark) {
+      .result-item {
+        background: #2a3a67;
+        border-color: #3b82f6;
+        color: #3b82f6;
+        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+      }
+    }
+
+    /* Links */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .link {
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 2px dashed rgba(18, 92, 219, 0.4);
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+      background: linear-gradient(180deg, transparent, rgba(18, 92, 219, 0.08));
+      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+      user-select: none;
+    }
+    .link:hover,
+    .link:focus {
+      background-color: rgba(18, 92, 219, 0.18);
+      border-color: var(--accent);
+      outline: none;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .img-placeholder {
+      height: 90px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #e6eefc, #ffffff);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      color: #7084a2;
+      user-select: none;
+      padding: 8px;
+      text-align: center;
+      transition: background-color var(--transition), color var(--transition);
+    }
+    @media (prefers-color-scheme: dark) {
+      .img-placeholder {
+        background: linear-gradient(180deg, #1e293b, #0f172a);
+        color: #94a3b8;
+      }
+    }
+
+    /* Small muted text */
+    p.muted-small {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 14px;
+      user-select: none;
+    }
+
+    /* Status */
+    .status {
+      text-align: right;
+      min-width: 150px;
+      color: var(--text-secondary);
+      user-select: none;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .status .small {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .pill {
+      display: inline-block;
+      background: var(--glass);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 14px;
+      user-select: none;
+      box-shadow: 0 3px 10px var(--shadow-light);
+      border: 1.5px solid rgba(15, 23, 42, 0.15);
+      transition: background-color var(--transition), border-color var(--transition);
+      text-align: center;
+    }
+
+    /* Aside */
+    aside {
+      position: sticky;
+      top: 72px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-self: start;
+    }
+    @media (max-width: 900px) {
+      aside {
+        position: relative;
+        top: 0;
+        margin-top: 20px;
+      }
+    }
+
+    /* Botão baixar gráfico */
+    #downloadBtn {
+      margin-top: 16px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      background-color: var(--accent);
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color var(--transition);
+      box-shadow: 0 6px 18px rgba(18, 92, 219, 0.4);
+    }
+    #downloadBtn:hover,
+    #downloadBtn:focus {
+      background-color: var(--accent-light);
+      outline: none;
+    }
+
+    /* Fade in animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Estilo para o gráfico */
+    #chartContainer {
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="Barra de navegação principal">
+    <div class="brand" aria-label="Identidade da escola e título do projeto">
+      <div class="logo" aria-hidden="true">6A</div>
+      <div class="title">6º A/B — Mitos e Verdades</div>
+    </div>
+    <button id="darkModeToggle" aria-pressed="false" aria-label="Ativar modo escuro">Modo Escuro</button>
+  </nav>
+
+  <div class="container">
+    <main>
+      <section class="card" aria-labelledby="intro-title">
+        <h2 id="intro-title" class="section-title">Projeto</h2>
+        <p class="lead">
+          Este projeto aborda o impacto do derretimento das geleiras, promovendo a
+          conscientização sobre mudanças climáticas.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="team-title">
+        <h2 id="team-title" class="section-title">Equipe</h2>
+        <div class="team-list" role="list" aria-label="Lista da equipe">
+          <span class="pill" role="listitem">Adriano Vieira</span>
+          <span class="pill" role="listitem">Bernardo Costa</span>
+          <span class="pill" role="listitem">Lara Monteiro</span>
+          <span class="pill" role="listitem">Luísa Braga</span>
+          <span class="pill" role="listitem">Maria Eduarda</span>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="sectors-title">
+        <h2 id="sectors-title" class="section-title">Setores de Pesquisa</h2>
+        <div class="sector" role="list" aria-label="Setores de pesquisa">
+          <div class="result-item" role="listitem" tabindex="0">Mares e Oceanos</div>
+          <div class="result-item" role="listitem" tabindex="0">Clima e Atmosfera</div>
+          <div class="result-item" role="listitem" tabindex="0">Biosfera e Ecossistemas</div>
+          <div class="result-item" role="listitem" tabindex="0">Poluição e Contaminação</div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="links-title">
+        <h2 id="links-title" class="section-title">Links Úteis</h2>
+        <div class="links">
+          <a class="link" href="https://www.florianopolis.ifsc.edu.br/" target="_blank" rel="noopener noreferrer" aria-label="Ir para site do IFSC Florianópolis">IFSC Florianópolis</a>
+          <a class="link" href="https://sme.pmf.sc.gov.br/" target="_blank" rel="noopener noreferrer" aria-label="Ir para Secretaria Municipal de Educação de Florianópolis">Secretaria Municipal de Educação</a>
+          <a class="link" href="https://en.unesco.org/" target="_blank" rel="noopener noreferrer" aria-label="Ir para site da UNESCO">UNESCO</a>
+        </div>
+      </section>
+
+      <!-- Gráfico -->
+      <section class="card" aria-labelledby="chart-title">
+        <h2 id="chart-title" class="section-title">Gráfico: Derretimento das Geleiras (2015-2024)</h2>
+        <div id="chartContainer">
+          <canvas id="glacierChart" aria-label="Gráfico de linhas mostrando o derretimento das geleiras de 2015 a 2024" role="img"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <aside>
+      <section class="card" aria-label="Galeria de imagens ilustrativas">
+        <h2 class="section-title">Galeria</h2>
+        <div class="gallery" role="list" aria-label="Galeria de imagens">
+          <img src="https://conteudo.imguol.com.br/c/noticias/2015/01/26/26jan2015---parte-da-geleira-de-monacobreen-cai-no-oceano---um-fenomeno-conhecido-como-claving-a-mudanca-climatica-esta-aquecendo-as-aguas-do-planeta-com-um-impacto-especialmente-dramatico-nas-1422276116955_1920x1281.jpg" alt="Geleira derretendo com água escorrendo" role="listitem" tabindex="0" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbc0o9Y5P50qE4k8m1R8EbY8LXQjVWiCt8-pNVxZ6own64zFeIAPNbaP0&s" alt="Montanhas cobertas de gelo" role="listitem" tabindex="0" />
+          <img src="https://images.unsplash.com/photo-1488227402652-00175718582c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8" alt="Oceano com icebergs flutuantes" role="listitem" tabindex="0" />
+          <img src="https://www.shutterstock.com/image-photo/towering-melting-iceberg-arctic-icy-260nw-2482464231.jpg" alt="Degelo no Ártico" role="listitem" tabindex="0" />
+        </div>
+      </section>
+
+      <section class="card status" aria-label="Status do projeto">
+        <div>
+          <p class="small">Status atual</p>
+          <p class="pill">Em desenvolvimento</p>
+        </div>
+        <div>
+          <p class="small">Última atualização</p>
+          <p class="pill">05/09/2025</p>
+        </div>
+      </section>
+
+      <button id="downloadBtn" aria-label="Baixar gráfico de dados">Baixar gráfico</button>
+    </aside>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // Dark Mode Toggle
+    const toggleBtn = document.getElementById("darkModeToggle");
+    function setDarkMode(enabled) {
+      if (enabled) {
+        document.documentElement.classList.add("dark");
+        toggleBtn.textContent = "Modo Claro";
+        toggleBtn.setAttribute("aria-pressed", "true");
+        localStorage.setItem("darkMode", "true");
+      } else {
+        document.documentElement.classList.remove("dark");
+        toggleBtn.textContent = "Modo Escuro";
+        toggleBtn.setAttribute("aria-pressed", "false");
+        localStorage.setItem("darkMode", "false");
+      }
+    }
+    toggleBtn.addEventListener("click", () => {
+      const enabled = document.documentElement.classList.toggle("dark");
+      setDarkMode(enabled);
+    });
+
+    // Preserve user preference on load
+    window.addEventListener("DOMContentLoaded", () => {
+      const darkModePref = localStorage.getItem("darkMode");
+      if (darkModePref === "true") {
+        setDarkMode(true);
+      }
+    });
+
+    // Configurar o gráfico
+    const ctx = document.getElementById("glacierChart").getContext("2d");
+
+    // Cores para o modo claro e escuro
+    function getColors() {
+      const isDark = document.documentElement.classList.contains("dark");
+      return {
+        line: isDark ? "#3b82f6" : "#125cdb",
+        grid: isDark ? "#475569" : "#e0e7ff",
+        text: isDark ? "#e0e7ff" : "#0f172a"
+      };
+    }
+
+    let colors = getColors();
+
+    const data = {
+      labels: ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+      datasets: [{
+        label: "Derretimento das Geleiras (em km³)",
+        data: [4500, 4200, 3800, 3500, 3200, 2900, 2600, 2300, 2000, 1700],
+        borderColor: colors.line,
+        backgroundColor: "rgba(18, 92, 219, 0.2)",
+        fill: true,
+        tension: 0.3,
+        pointRadius: 5,
+        pointBackgroundColor: colors.line,
+        pointHoverRadius: 7
+      }]
+    };
+
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: colors.text,
+            font: {
+              size: 14,
+              weight: "700"
+            }
+          }
+        },
+        tooltip: {
+          enabled: true,
+          mode: 'nearest',
+          intersect: false,
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: colors.text,
+            font: {
+              size: 14
+            }
+          },
+          grid: {
+            color: colors.grid
+          }
+        },
+        y: {
+          ticks: {
+            color: colors.text,
+            font: {
+              size: 14
+            }
+          },
+          grid: {
+            color: colors.grid
+          },
+          beginAtZero: true
+        }
+      }
+    };
+
+    let glacierChart = new Chart(ctx, {
+      type: "line",
+      data: data,
+      options: options
+    });
+
+    // Atualizar cores do gráfico no modo escuro/claro
+    function updateChartColors() {
+      colors = getColors();
+      glacierChart.data.datasets[0].borderColor = colors.line;
+      glacierChart.data.datasets[0].pointBackgroundColor = colors.line;
+      glacierChart.options.plugins.legend.labels.color = colors.text;
+      glacierChart.options.scales.x.ticks.color = colors.text;
+      glacierChart.options.scales.x.grid.color = colors.grid;
+      glacierChart.options.scales.y.ticks.color = colors.text;
+      glacierChart.options.scales.y.grid.color = colors.grid;
+      glacierChart.update();
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      setTimeout(() => {
+        updateChartColors();
+      }, 100); // Timeout para esperar o modo alterar
+    });
+
+    // Botão para baixar o gráfico
+    const downloadBtn = document.getElementById("downloadBtn");
+    downloadBtn.addEventListener("click", () => {
+      const link = document.createElement("a");
+      link.download = "grafico-derretimento-geleiras.png";
+      link.href = glacierChart.toBase64Image();
+      link.click();
+      link.remove();
+    });
+  </script>
+</body>
+</html>

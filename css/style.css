@@ -1,0 +1,24 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 14px;
+  justify-content: center; /* centraliza as imagens, opcional */
+}
+
+.gallery img {
+  flex: 0 0 110px; /* largura fixa para cada imagem */
+  height: 90px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  transition: filter 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery img:hover,
+.gallery img:focus {
+  filter: brightness(0.9);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
