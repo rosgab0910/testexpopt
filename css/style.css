@@ -1,15 +1,14 @@
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
   margin-top: 14px;
-  justify-content: center; /* centraliza as imagens, opcional */
 }
 
 .gallery img {
-  flex: 0 0 110px; /* largura fixa para cada imagem */
-  height: 90px;
-  object-fit: cover;
+  width: 150px;       /* largura fixa */
+  height: 100px;      /* altura fixa */
+  object-fit: cover;  /* cobre toda área, cortando o que passar */
   border-radius: 14px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
   transition: filter 0.3s ease;
