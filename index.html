@@ -619,5 +619,73 @@
       link.remove();
     });
   </script>
+ <section class="card" aria-labelledby="true-false-title">
+  <h2 id="true-false-title" class="section-title">Verdadeiro ou Falso</h2>
+  <p class="lead">Responda as afirmações abaixo e verifique se você está correto!</p>
+  
+  <form id="trueFalseForm" aria-labelledby="true-false-title">
+    <div class="question">
+      <p><strong>1. O derretimento das geleiras contribui para a elevação do nível do mar.</strong></p>
+      <input type="radio" id="q1_true" name="q1" value="true" required />
+      <label for="q1_true">Verdadeiro</label><br />
+      <input type="radio" id="q1_false" name="q1" value="false" />
+      <label for="q1_false">Falso</label>
+    </div>
+
+    <div class="question">
+      <p><strong>2. As geleiras do Ártico não estão afetadas pelas mudanças climáticas.</strong></p>
+      <input type="radio" id="q2_true" name="q2" value="true" required />
+      <label for="q2_true">Verdadeiro</label><br />
+      <input type="radio" id="q2_false" name="q2" value="false" />
+      <label for="q2_false">Falso</label>
+    </div>
+
+    <div class="question">
+      <p><strong>3. O derretimento das geleiras pode ter efeitos negativos nos ecossistemas marinhos.</strong></p>
+      <input type="radio" id="q3_true" name="q3" value="true" required />
+      <label for="q3_true">Verdadeiro</label><br />
+      <input type="radio" id="q3_false" name="q3" value="false" />
+      <label for="q3_false">Falso</label>
+    </div>
+
+    <button type="button" id="checkAnswersBtn">Verificar Respostas</button>
+  </form>
+
+  <!-- Gabarito, inicialmente oculto -->
+  <div id="answerKey" class="card" style="display: none;">
+    <h3>Gabarito</h3>
+    <p><strong>1. O derretimento das geleiras contribui para a elevação do nível do mar:</strong> Verdadeiro</p>
+    <p><strong>2. As geleiras do Ártico não estão afetadas pelas mudanças climáticas:</strong> Falso</p>
+    <p><strong>3. O derretimento das geleiras pode ter efeitos negativos nos ecossistemas marinhos:</strong> Verdadeiro</p>
+  </div>
+</section>
+
+<script>
+  // Função para verificar as respostas
+  document.getElementById("checkAnswersBtn").addEventListener("click", function() {
+    // Esconde a mensagem "Verificar respostas"
+    document.getElementById("checkAnswersBtn").style.display = "none";
+
+    // Mostra o gabarito
+    document.getElementById("answerKey").style.display = "block";
+    
+    // Obtém as respostas do usuário
+    const q1Answer = document.querySelector('input[name="q1"]:checked');
+    const q2Answer = document.querySelector('input[name="q2"]:checked');
+    const q3Answer = document.querySelector('input[name="q3"]:checked');
+    
+    // Verifica se as respostas estão corretas (você pode personalizar essa lógica)
+    if (q1Answer && q2Answer && q3Answer) {
+      alert(`Respostas:
+      1. ${q1Answer.value === "true" ? "Verdadeiro" : "Falso"}
+      2. ${q2Answer.value === "true" ? "Verdadeiro" : "Falso"}
+      3. ${q3Answer.value === "true" ? "Verdadeiro" : "Falso"}`);
+    } else {
+      alert("Por favor, marque todas as respostas antes de verificar.");
+    }
+  });
+</script>
+
+
 </body>
 </html>
