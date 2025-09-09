@@ -117,3 +117,34 @@ button[type="submit"]:hover {
   opacity: 1;
   transform: translateY(0);
 }
+.true-false {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.true-false .option {
+  background: #f9fbff;
+  border-radius: 12px;
+  padding: 14px 20px;
+  border: 1.5px solid rgba(18, 92, 219, 0.3);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  flex: 1 1 200px;
+  user-select: none;
+  box-shadow: 0 6px 16px rgba(18, 92, 219, 0.15);
+  cursor: pointer;
+  transition: background-color var(--transition), border-color var(--transition);
+}
+
+.true-false input {
+  display: none; /* esconder o botão original */
+}
+
+.true-false input:checked + label {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}

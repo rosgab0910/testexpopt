@@ -617,46 +617,56 @@
       link.remove();
     });
   </script>
- <section class="card" aria-labelledby="true-false-title">
+<section class="card" aria-labelledby="true-false-title">
   <h2 id="true-false-title" class="section-title">Verdadeiro ou Falso</h2>
   <p class="lead">Responda as afirmações abaixo e verifique se você está correto!</p>
-  
+
   <form id="trueFalseForm" aria-labelledby="true-false-title">
     <div class="question">
       <p><strong>1. O derretimento das geleiras contribui para a elevação do nível do mar.</strong></p>
-      <input type="radio" id="q1_true" name="q1" value="true" required />
-      <label for="q1_true">Verdadeiro</label><br />
-      <input type="radio" id="q1_false" name="q1" value="false" />
-      <label for="q1_false">Falso</label>
+      <div class="true-false">
+        <input type="radio" id="q1_true" name="q1" value="true" required />
+        <label class="option" for="q1_true">Verdadeiro</label>
+
+        <input type="radio" id="q1_false" name="q1" value="false" />
+        <label class="option" for="q1_false">Falso</label>
+      </div>
     </div>
 
     <div class="question">
       <p><strong>2. As geleiras do Ártico não estão afetadas pelas mudanças climáticas.</strong></p>
-      <input type="radio" id="q2_true" name="q2" value="true" required />
-      <label for="q2_true">Verdadeiro</label><br />
-      <input type="radio" id="q2_false" name="q2" value="false" />
-      <label for="q2_false">Falso</label>
+      <div class="true-false">
+        <input type="radio" id="q2_true" name="q2" value="true" required />
+        <label class="option" for="q2_true">Verdadeiro</label>
+
+        <input type="radio" id="q2_false" name="q2" value="false" />
+        <label class="option" for="q2_false">Falso</label>
+      </div>
     </div>
 
     <div class="question">
       <p><strong>3. O derretimento das geleiras pode ter efeitos negativos nos ecossistemas marinhos.</strong></p>
-      <input type="radio" id="q3_true" name="q3" value="true" required />
-      <label for="q3_true">Verdadeiro</label><br />
-      <input type="radio" id="q3_false" name="q3" value="false" />
-      <label for="q3_false">Falso</label>
+      <div class="true-false">
+        <input type="radio" id="q3_true" name="q3" value="true" required />
+        <label class="option" for="q3_true">Verdadeiro</label>
+
+        <input type="radio" id="q3_false" name="q3" value="false" />
+        <label class="option" for="q3_false">Falso</label>
+      </div>
     </div>
 
     <button type="button" id="checkAnswersBtn">Verificar Respostas</button>
   </form>
 
-  <!-- Gabarito, inicialmente oculto -->
+  <!-- Gabarito -->
   <div id="answerKey" class="card" style="display: none;">
     <h3>Gabarito</h3>
-    <p><strong>1. O derretimento das geleiras contribui para a elevação do nível do mar:</strong> Verdadeiro.</p>
-    <p><strong>2. As geleiras do Ártico não estão afetadas pelas mudanças climáticas:</strong> Falso.</p>
-    <p><strong>3. O derretimento das geleiras pode ter efeitos negativos nos ecossistemas marinhos:</strong> Verdadeiro.</p>
+    <p><strong>1:</strong> Verdadeiro</p>
+    <p><strong>2:</strong> Falso</p>
+    <p><strong>3:</strong> Verdadeiro</p>
   </div>
 </section>
+
 
 <script>
   // Função para verificar as respostas
